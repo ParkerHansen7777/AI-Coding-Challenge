@@ -388,6 +388,34 @@ class TestTaskManagerTool:
         assert "Task 'Revert Task' status changed from 'complete' to 'not complete'" in result[0].text
     
     @pytest.mark.asyncio
+    async def test_complete_task_already_complete_error(self):
+        """Test error when trying to complete an already completed task"""
+        # Add a task
+        await self.tool.execute({
+            "option": "addTask",
+            "taskName": "Already Complete Task",
+            "description": "This task will be completed twice"
+        })
+        
+        # Complete the task
+        await self.tool.execute({
+            "option": "completeTask",
+            "taskName": "Already Complete Task",
+            "completionStatus": "complete"
+        })
+        
+        # Try to complete it again
+        result = await self.tool.execute({
+            "option": "completeTask",
+            "taskName": "Already Complete Task",
+            "completionStatus": "complete"
+        })
+        
+        assert len(result) == 1
+        assert isinstance(result[0], TextContent)
+        assert "Error: Task 'Already Complete Task' is already marked as complete" in result[0].text
+    
+    @pytest.mark.asyncio
     async def test_invalid_option(self):
         """Test with invalid option"""
         result = await self.tool.execute({

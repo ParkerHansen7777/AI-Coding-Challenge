@@ -36,8 +36,8 @@ py -m pytest tests/ --cov=mcp_server.tools --cov-report=term-missing
 
 ## Test Results
 
-- **Total Tests**: 101
-- **Passed**: 101
+- **Total Tests**: 102
+- **Passed**: 102
 - **Coverage**: 100%
 
 ## Tools Tested
@@ -47,7 +47,7 @@ py -m pytest tests/ --cov=mcp_server.tools --cov-report=term-missing
 | AnalyzeFileTool | 25 | Line count, TODO detection, error handling |
 | GetWorkLogTool | 20 | File reading, content parsing, error handling |
 | WorkLoggingTool | 24 | Work logging, timestamp handling, error handling |
-| TaskManagerTool | 32 | CRUD operations, database handling, error handling |
+| TaskManagerTool | 33 | CRUD operations, database handling, error handling, duplicate completion prevention |
 
 ## Test Categories
 

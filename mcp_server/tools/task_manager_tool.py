@@ -167,7 +167,11 @@ class TaskManagerTool(BaseTool):
                 
                 old_status = task['status']
                 
-                # Update the task
+                # Check if trying to complete an already completed task
+                if old_status == 'complete' and completion_status == 'complete':
+                    return [TextContent(type="text", text=f"Error: Task '{task_name}' is already marked as complete")]
+                
+                # Update the task only if not already complete
                 cursor = conn.execute(
                     "UPDATE tasks SET status = ?, updated_at = CURRENT_TIMESTAMP WHERE name = ?",
                     (completion_status, task_name)

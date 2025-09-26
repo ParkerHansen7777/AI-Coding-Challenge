@@ -35,7 +35,7 @@ AI-Coding-Challenge/
 │   └── unit/                 # Unit tests organized by tool
 │       ├── analyze_file/     # AnalyzeFileTool tests (25 tests)
 │       ├── get_work_log/     # GetWorkLogTool tests (20 tests)
-│       ├── task_manager/     # TaskManagerTool tests (32 tests)
+│       ├── task_manager/     # TaskManagerTool tests (33 tests)
 │       └── work_logging/     # WorkLoggingTool tests (24 tests)
 ├── server.py                  # Main entry point
 ├── requirements.txt           # Python dependencies
@@ -56,14 +56,78 @@ AI-Coding-Challenge/
 
 ## Test Coverage
 
-- **Total Tests**: 101 unit tests
+- **Total Tests**: 102 unit tests
 - **Coverage**: 100% across all tools
 - **Tools Tested**: All 4 tools with comprehensive edge cases and error handling
 
-## Running the Server
+## Setting up MCP Server in Cursor
+
+To use this MCP server with Cursor IDE, follow these steps:
+
+### 1. Install Dependencies
 ```bash
-python server.py
+# Install Python dependencies
+pip install -r requirements.txt
 ```
+
+### 2. Configure Cursor MCP Settings
+
+1. Open Cursor IDE
+2. Go to Settings (Ctrl/Cmd + ,)
+3. Search for "MCP" or navigate to Extensions → MCP
+4. Add a new MCP server configuration
+
+### 3. Add Server Configuration
+
+Add the following configuration to your Cursor MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "mcp-challenge": {
+      "command": "python",
+      "args": ["server.py"],
+      "cwd": "/path/to/your/AI-Coding-Challenge"
+    }
+  }
+}
+```
+
+**Note**: Update the `cwd` path to match your actual project directory.
+
+### 4. Alternative Configuration (if using virtual environment)
+
+If you're using a virtual environment:
+
+```json
+{
+  "mcpServers": {
+    "mcp-challenge": {
+      "command": "/path/to/your/venv/bin/python",
+      "args": ["server.py"],
+      "cwd": "/path/to/your/AI-Coding-Challenge"
+    }
+  }
+}
+```
+
+### 5. Restart Cursor
+
+After adding the configuration, restart Cursor IDE to load the MCP server.
+
+### 6. Verify Connection
+
+Once Cursor restarts, you should see the MCP server tools available:
+- `mcp_MCP-Challenge_analyzeFile` - Analyze files with various options
+- `mcp_MCP-Challenge_logWork` - Log work descriptions with timestamps  
+- `mcp_MCP-Challenge_getWorkLog` - Retrieve work log entries
+- `mcp_MCP-Challenge_taskManager` - Manage tasks with database storage
+
+### Troubleshooting
+
+- **Server not starting**: Check that Python is in your PATH and all dependencies are installed
+- **Tools not appearing**: Verify the `cwd` path is correct and the server.py file exists
+- **Permission errors**: Ensure Cursor has permission to execute Python scripts in the project directory
 
 ## Running Tests
 ```bash

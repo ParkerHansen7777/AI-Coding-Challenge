@@ -88,15 +88,15 @@
 **Parameters**:
 - none
 
-**Functionaliity**: Returns the append-only work log
+**Functionality**: Returns the append-only work log
 
 ### Task Manager Tool
 
 **Parameters**:
 - `option` (task management option) (required)
 - `taskName` (name of task) (required when option parameter is `addTask` or `completeTask`)
-- `description` (descripton of task) (required when option parameter is `addTask`)
-- `completionStatus` (a value or either `complete` or `not complete`') (required when option parameter is `completeTask`)
+- `description` (description of task) (required when option parameter is `addTask`)
+- `completionStatus` (a value of either `complete` or `not complete`) (required when option parameter is `completeTask`)
 
 **Functionality**:
   **Options**:
@@ -114,20 +114,20 @@
 | Concurrency | Poor | Fair | Excellent |
 | Human Readable | Yes | Yes | No |
 
-- SQLite option provides advanced quering capabalities while providing a base for future features
+- SQLite option provides advanced querying capabilities while providing a base for future features
 
 ## Project TODO List
 
 - [x] Get a barebones server running, establish communication between MCP server and AI model
 - [x] Test MCP server communication with simple echo tool
 - [x] Create first tool, analyze files
-- [x] Test analyze files tool, edge cases, error handling, unit testing, manuel testing
+- [x] Test analyze files tool, edge cases, error handling, unit testing, manual testing
 - [x] Create work logging tool, logWork
-- [x] Test work logging tool, edge cases, error handling, unit testing, manuel testing
+- [x] Test work logging tool, edge cases, error handling, unit testing, manual testing
 - [x] Create get work log tool, getWorkLog
-- [x] Test get work log tool, edge cases, error handling, unit testing, manuel testing
+- [x] Test get work log tool, edge cases, error handling, unit testing, manual testing
 - [x] Create Task manager tool, taskManager
-- [x] Test Task manager tool, edge cases, error handling, unit testing, manuel testing
+- [x] Test Task manager tool, edge cases, error handling, unit testing, manual testing
 
 ## What are AI Agents?
 
