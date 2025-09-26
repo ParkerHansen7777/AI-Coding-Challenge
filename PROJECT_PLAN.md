@@ -41,7 +41,7 @@
 - A thin stdio process is launched by Cursor and relays to the daemon
 - Useful for fast file-change subscriptions and persistent auth flows
 
-**Recommendation**: Option 1 (Local stdio server) is the best fit for a 'code quality' implementation because it:
+**Recommendation**: Option 1 (Local stdio server) is the best fit for implementation because it:
 - Has access to file system
 - Simple to distribute
 - Secured-by-default on Windows
@@ -68,12 +68,13 @@
 ### Analyze Files Tool
 
 **Parameters**: 
-- `file_path` (relative file path from project directory root)
-- `option` (analysis type)
+- `file_path` (relative file path from project directory root) (required)
+- `option` (analysis option) (required)
 
-**Options**:
-- **Line Counter**: Counts the number of lines in a file and returns them
-- **hasTodos**: Determines if a file has a comment containing the case sensitive string 'TODO', usually indicative of an unfinished code block and returns a bool
+**Functionality**:
+  **Options**:
+  - **`lineCount`**: Counts the number of lines in a file and returns them
+  - **`hasTodos`**: Determines if a file has a comment containing the case sensitive string 'TODO', usually indicative of an unfinished code block and returns a bool
 
 ### Work Logging Tool
 
@@ -82,15 +83,81 @@
 
 **Functionality**: Keeps track of work in an append-only log with description of work and timestamp of append
 
+### Get Work Log Tool
+
+**Parameters**:
+- none
+
+**Functionaliity**: Returns the append-only work log
+
 ### Task Manager Tool
 
-**Parameters**: TBD
+**Parameters**:
+- `option` (task management option) (required)
+- `taskName` (name of task) (required when option parameter is `addTask` or `completeTask`)
+- `description` (descripton of task) (required when option parameter is `addTask`)
+- `completionStatus` (a value or either `complete` or `not complete`') (required when option parameter is `completeTask`)
 
-**Functionality**: TBD
+**Functionality**:
+  **Options**:
+  - **`addTask`**: adds a task (name, description, completionStatus (complete or not complete)) to the collection of tasks
+  - **`listTasks`**: lists out all the tasks and their attributes from the collection of tasks
+  - **`completeTask`**: edits completion status for selected task via taskName parameter
+
+**Storage**:
+  **Comparison Summary**:
+| Feature | Plain Text | JSON File | SQLite |
+|---------|------------|-----------|---------|
+| Complexity | Low | Medium | Medium-High |
+| Data Structure | None | Good | Excellent |
+| Querying | Manual | Basic | Full SQL |
+| Concurrency | Poor | Fair | Excellent |
+| Human Readable | Yes | Yes | No |
+
+- SQLite option provides advanced quering capabalities while providing a base for future features
 
 ## Project TODO List
 
 - [x] Get a barebones server running, establish communication between MCP server and AI model
-- [x] Test a simple 'echo' tool to confirm communication
-- [ ] Create first tool, analyze files
-- [ ] Test analyze files tool, edge cases, error handling
+- [x] Test MCP server communication with simple echo tool
+- [x] Create first tool, analyze files
+- [x] Test analyze files tool, edge cases, error handling, unit testing, manuel testing
+- [x] Create work logging tool, logWork
+- [x] Test work logging tool, edge cases, error handling, unit testing, manuel testing
+- [x] Create get work log tool, getWorkLog
+- [x] Test get work log tool, edge cases, error handling, unit testing, manuel testing
+- [x] Create Task manager tool, taskManager
+- [x] Test Task manager tool, edge cases, error handling, unit testing, manuel testing
+
+## What are AI Agents?
+
+AI agents are autonomous software entities that can perceive their environment, make decisions, and take actions to achieve specific goals. They operate with varying levels of autonomy and can be designed for specific tasks or general problem-solving.
+
+## AI Models vs AI Agents
+
+### AI Models (like LLMs)
+- **What they are**: Computational systems trained on data to perform specific tasks
+- **Core function**: Process inputs and generate outputs
+- **Examples**: GPT, BERT, ResNet, etc.
+- **Nature**: Stateless, reactive components
+
+### AI Agents
+- **What they are**: Systems that use AI models (and other tools) to achieve goals
+- **Core function**: Plan, decide, and act autonomously
+- **Examples**: Autonomous robots, trading bots, personal assistants
+- **Nature**: Stateful, proactive systems
+
+## Key Differences
+
+| Aspect | AI Models | AI Agents |
+|--------|-----------|-----------|
+| Purpose | Process data/inputs | Achieve goals |
+| State | Stateless | Stateful |
+| Behavior | Reactive | Proactive + Reactive |
+| Autonomy | None | High |
+| Decision Making | Pattern matching | Goal-oriented planning |
+| Tools | Input → Output | Can use multiple tools/models |
+
+## Summary
+
+AI models (like LLMs) are the "brain" that processes information, while AI agents are the "body" that uses that brain to achieve goals. For code quality improvements, you'll typically want to build agents that use LLMs as one of their tools, rather than just using LLMs directly. This gives you the autonomy, planning, and learning capabilities needed for effective code quality management.

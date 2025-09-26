@@ -1,0 +1,4 @@
+[2025-09-25 09:51:06] Standard timestamp
+[2025-09-25 09:52:43.123] Timestamp with milliseconds
+[2025-09-25 09:53:32] Another standard timestamp
+[2025-09-25 09:54:15.456] Another with milliseconds
